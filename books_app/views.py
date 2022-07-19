@@ -9,9 +9,17 @@ except Exception:
 
 # Create your views here.
 
+# any dynamic data goes into context:
 def show_books(request):
    books =  Book.objects.all()
    context = {
-        "books": books if Book else None,
+        'books': books if Book else None,
    }
    return render(request, "books/list.html", context)
+
+
+def show_book(request, pk):
+    context = {
+        'book': Book.objects.get(pk=pk) if Book else None,
+    }
+    return render(request, "books/detail.html", context)
