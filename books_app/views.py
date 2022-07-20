@@ -41,6 +41,20 @@ def show_books(request):
    return render(request, "books/list.html", context)
 
 
-def edit_book(request):
-   pass
+def edit_book(request, pk):
+    if Book and BookForm:
+        inst = Book.objects.get(pk=pk)
+        if request.method == "POST":
+            form = BookForm(request.POST, instance=inst)
+            if form.is_valid():
+                form.save()
+                return redirect("book_detail", pk=pk)
+        else:
+            form = BookForm(instance=inst)
+    else:
+        form = None
+    context = {
+        "form": form,
+    }
+    return render(request, "books/edit.html", context)
 
