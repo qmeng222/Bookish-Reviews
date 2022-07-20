@@ -16,12 +16,13 @@
     <main>
       {% for book in books %}
       <div class="book-card">
-        <p><a href={% url 'book_detail' book.pk %}>{{ book.title}}</a></p>
-        <p> by {{ book.author }}</p>
-        <p>{{ book.pages }}</p>
-        <p>{{ book.isbn }}</p>
+        <p style="font-size: larger"><a href={% url 'book_detail' book.pk %}>{{ book.title}}</a></p>
+        <p>author: {{ book.author }}</p>
+        <p>pages: {{ book.pages }}</p>
+        <p>ISBN: {{ book.isbn }}</p>
         <img src="{{ book.image }}" alt="book cover" width="200" height="300">
         <p>{{ book.description }}</p>
+        <br />
       </div>
       {% endfor %}
     </main>
