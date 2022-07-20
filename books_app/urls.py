@@ -15,7 +15,7 @@ urlpatterns = [
     path("create/", create_book,  name="create_book"),
     path("", show_books, name="show_books"),
     path("<int:pk>/", show_book, name="book_detail"),
-    path("edit/", edit_book, name="book_edit"),
+    # path("edit/", edit_book, name="book_edit"),
 ]
 
 

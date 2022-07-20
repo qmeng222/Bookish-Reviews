@@ -1,15 +1,16 @@
 from django.shortcuts import redirect, render
 
 try:
-   from books_app.forms import BookForm
-   from books_app.models import Book
+   from books_app.forms import *
+   from books_app.models import *
 except Exception:
    BookForm = None
    Book = None
 
 # Create your views here.
+# CRUD (create, read, update, delete)
+# any dynamic data goes into context
 
-# any dynamic data goes into context:
 def create_book(request):
    context = {}
 
@@ -58,3 +59,58 @@ def edit_book(request, pk):
     }
     return render(request, "books/edit.html", context)
 
+
+
+# for magazine:
+
+def create_magazine(request):
+   context = {}
+
+   form = MagazineForm(request.POST or None)
+   if form.is_valid():
+      form.save()
+      return redirect("show_magazines")
+   elif MagazineForm:
+        form = MagazineForm()
+   else:
+        form = None
+
+   context["form"] = form
+   return render(request, "magazines/create.html", context)
+
+def show_magazine(request, pk):
+    context = {
+        'magazine': Magazine.objects.get(pk=pk) if Magazine
+        else None,
+    }
+    return render(request, "magazines/detail.html", context)
+
+
+def show_magazines(request):
+    magazines =  Magazine.objects.all()
+    context = {
+        'magazines': magazines if Magazine else None,
+    }
+    return render(request, "magazines/list.html", context)
+
+
+def edit_magazine(request, pk):
+    if Magazine and MagazineForm:
+        inst = Magazine.objects.get(pk=pk)
+        if request.method == "POST":
+            form = MagazineForm(request.POST, instance=inst)
+            if form.is_valid():
+                form.save()
+                return redirect("magazine_detail", pk=pk)
+        else:
+            form = MagazineForm(instance=inst)
+    else:
+        form = None
+        context = {
+        "form": form,
+    }
+    return render(request, "magazines/edit.html", context)
+
+
+def update_magazine(request, pk):
+    pass

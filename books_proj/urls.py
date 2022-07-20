@@ -26,11 +26,6 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("books_app.urls")),
     path("books/", include("books_app.urls")),
-    # path(
-    #     "",
-    #     RedirectView.as_view(url=reverse_lazy("books_list")),
-    #     name="home",
-    # ),
+    path("magazines/", include("books_app.magazines_urls")),
 ]

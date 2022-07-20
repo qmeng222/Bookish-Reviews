@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h3>Update this Book</h3>
+      <div class="books-card">
+        <p style="font-size: larger; color: blue">{{ book.title }}</p>
+        <p>author: {{ book.author }}</p>
+        <p>pages: {{ book.pages }}</p>
+        <p>ISBN: {{ book.isbn }}</p>
+        {% if book.image %}
+        <img src="{{ book.image }}" alt="book cover" width="200" height="300" />
+        <p>{% endif %}</p>
+        <p>{{ book.description }}</p>
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %} {{ form.as_p }}
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

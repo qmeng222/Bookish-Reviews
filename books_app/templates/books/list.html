@@ -14,6 +14,7 @@
       <nav></nav>
     </header>
     <main>
+      related to the book list
       {% for book in books %}
       <div class="book-card">
         <p style="font-size: larger"><a href={% url 'book_detail' book.pk %}>{{ book.title}}</a></p>

@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magazines List</title>
+  </head>
+
+  <body>
+    <header>
+      <nav></nav>
+    </header>
+    <main>
+      related to the magazine list
+      {% for magazine in magazines %}
+      <div class="magazine-card">
+        <p style="font-size: larger"><a href={% url 'magazine_detail' magazine.pk %}>{{ magazine.title}}</a></p>
+        <p>title: {{ magazine.title }}</p>
+        <p>release cycle: {{ magazine.release_cycle }}</p>
+        <img src="{{ magazine.image }}" alt="magazine cover" width="200" height="300">
+        <p>{{ magazine.description }}</p>
+        <br />
+      </div>
+      {% endfor %}
+    </main>
+  </body>
+</html>
+
