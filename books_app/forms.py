@@ -1,4 +1,5 @@
 from django import forms
+from .models import Book
 
 try:
     from books_app.models import Book
@@ -6,6 +7,7 @@ try:
     class BookForm(forms.ModelForm):
         class Meta:
             model = Book
+            # exclude = []
             fields = [
                 "title",
                 "author",

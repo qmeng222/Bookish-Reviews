@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,10 +16,12 @@
     <main>
       {% for book in books %}
       <div class="book-card">
+        <p><a href={% url 'book_detail' book.pk %}>{{ book.title}}</a></p>
         <p>{{ book.title }}</p>
         <p>{{ book.author }}</p>
         <p>{{ book.pages }}</p>
         <p>{{ book.isbn }}</p>
+        <img src="{{ book.image }}" alt="book cover">
         <p>{{ book.description }}</p>
       </div>
       {% endfor %}
