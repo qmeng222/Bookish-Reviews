@@ -25,11 +25,11 @@
         <p>{% endif %}</p>
         <p>{{ magazine.description }}</p>
 
-        <!-- {% for issue in magazine.magazine_issues.all %}
+        {% for issue in magazine.magazine_issues.all %}
         <ul>
           <li>{{ issue.title }}</li>
         </ul>
-        {% endfor %} -->
+        {% endfor %}
 
         {% for magazine in magazines %}
         <ul>
