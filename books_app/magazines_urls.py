@@ -14,6 +14,7 @@ urlpatterns = [
     path("edit/", edit_book, name="book_edit"),
     path("<int:pk>/edit/", edit_magazine, name="edit_magazine"),
     path("<int:pk>/delete/", delete_magazine, name="delete_magazine"),
+    path("<str:genre_name>/", show_genre_mags, name = "show_genre"),
 ]
 
 

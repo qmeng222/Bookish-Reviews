@@ -112,3 +112,19 @@ def delete_magazine(request, pk):
         return redirect("show_magazines")
     return render(request, "magazines/delete.html", context)
 
+
+def show_mag_genres(request, mag_name):
+    genre = Genre.objects.get(name=mag_name)
+    context = {
+        "genre": genre
+    }
+    return render(request, "magazines/genre_detail.html", context)
+
+
+def show_genre_mags(request, genre_name):
+    g = Genre.objects.get(name=genre_name)
+    magazines = Magazine.objects.filter(genre=g)
+    context = {
+        "magazines": magazines
+    }
+    return render(request, "magazines/detail.html", context)

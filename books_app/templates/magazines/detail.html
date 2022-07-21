@@ -25,6 +25,17 @@
         <p>{% endif %}</p>
         <p>{{ magazine.description }}</p>
 
+        <!-- {% for issue in magazine.magazine_issues.all %}
+        <ul>
+          <li>{{ issue.title }}</li>
+        </ul>
+        {% endfor %} -->
+
+        {% for magazine in magazines %}
+        <ul>
+          <li>{{ magazine.title }}</li>
+        </ul>
+
         <a href={% url 'delete_magazine' magazine.pk %}>
           <button type="Button">delete</button>
         </a>
@@ -32,6 +43,8 @@
         <a href="{% url 'edit_magazine' magazine.pk %}">
           <button type="Button">edit</button>
         </a>
+
+        {% endfor %}
       </div>
     </main>
   </body>
