@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 try:
    from books_app.forms import *
@@ -43,26 +43,26 @@ def show_books(request):
 
 
 def edit_book(request, pk):
-    if Book and BookForm:
-        inst = Book.objects.get(pk=pk)
-        if request.method == "POST":
-            form = BookForm(request.POST, instance=inst)
-            if form.is_valid():
-                form.save()
-                return redirect("book_detail", pk=pk)
-        else:
-            form = BookForm(instance=inst)
-    else:
-        form = None
-    context = {
-        "form": form,
-    }
-    return render(request, "books/edit.html", context)
+    book = get_object_or_404(Book, pk=pk)
+    context = {}
+    form = BookForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
 
+    return render(request, 'books/edit.html', context)
+
+
+def delete_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    context = {}
+    if request.method == "POST":
+        book.delete()
+        return redirect("show_books")
+    return render(request, "books/delete.html", context)
 
 
 # for magazine:
-
 def create_magazine(request):
    context = {}
 
@@ -77,6 +77,7 @@ def create_magazine(request):
 
    context["form"] = form
    return render(request, "magazines/create.html", context)
+
 
 def show_magazine(request, pk):
     context = {
@@ -93,24 +94,21 @@ def show_magazines(request):
     }
     return render(request, "magazines/list.html", context)
 
-
 def edit_magazine(request, pk):
-    if Magazine and MagazineForm:
-        inst = Magazine.objects.get(pk=pk)
-        if request.method == "POST":
-            form = MagazineForm(request.POST, instance=inst)
-            if form.is_valid():
-                form.save()
-                return redirect("magazine_detail", pk=pk)
-        else:
-            form = MagazineForm(instance=inst)
-    else:
-        form = None
-        context = {
-        "form": form,
-    }
-    return render(request, "magazines/edit.html", context)
+    context = {}
+    form = MagazineForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+
+    return render(request, 'magazines/edit.html', context)
 
 
-def update_magazine(request, pk):
-    pass
+def delete_magazine(request, pk):
+    magazine = get_object_or_404(Magazine, pk=pk)
+    context = {}
+    if request.method == "POST":
+        magazine.delete()
+        return redirect("show_magazines")
+    return render(request, "magazines/delete.html", context)
+

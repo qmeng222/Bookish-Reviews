@@ -12,3 +12,5 @@ class MagazineAdmin(admin.ModelAdmin):
 admin.site.register(Book, BookAdmin)
 
 admin.site.register(Magazine, MagazineAdmin)
+
+

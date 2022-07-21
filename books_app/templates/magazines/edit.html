@@ -6,5 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit a Magazine</title>
   </head>
-  <body></body>
+  <body>
+    <header></header>
+    <main>
+      <h3>Please update this magazine:</h3>
+      <div>
+        <form method="POST" enctype="multipart/form-data">
+          <!-- Security token -->
+          {% csrf_token %}
+          <!-- Using the formset -->
+          {{ form.as_p }}
+          <input type="submit" value="update" />
+        </form>
+      </div>
+    </main>
+  </body>
 </html>

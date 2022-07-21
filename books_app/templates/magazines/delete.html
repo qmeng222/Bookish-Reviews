@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Delete a Book</title>
+    <title>Delete a Magazine</title>
   </head>
   <body>
     <header></header>
@@ -12,7 +12,7 @@
       <form method="POST">
         <!-- Security token -->
         {% csrf_token %}
-        <p>Are you sure you want to delete{{ book.author }}?</p>
+        <p>Are you sure you want to delete{{ magazine.title }}?</p>
         <input type="submit" value="delete" />
       </form>
     </main>

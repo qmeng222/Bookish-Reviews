@@ -24,6 +24,14 @@
         />
         <p>{% endif %}</p>
         <p>{{ magazine.description }}</p>
+
+        <a href={% url 'delete_magazine' magazine.pk %}>
+          <button type="Button">delete</button>
+        </a>
+
+        <a href="{% url 'edit_magazine' magazine.pk %}">
+          <button type="Button">edit</button>
+        </a>
       </div>
     </main>
   </body>

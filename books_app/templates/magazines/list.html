@@ -14,13 +14,11 @@
       <nav></nav>
     </header>
     <main>
-      related to the magazine list
       {% for magazine in magazines %}
       <div class="magazine-card">
         <p style="font-size: larger"><a href={% url 'magazine_detail' magazine.pk %}>{{ magazine.title}}</a></p>
-        <p>title: {{ magazine.title }}</p>
         <p>release cycle: {{ magazine.release_cycle }}</p>
-        <img src="{{ magazine.image }}" alt="magazine cover" width="200" height="300">
+        <img src="{{ magazine.image }}" alt="magazine cover" width="220" height="300">
         <p>{{ magazine.description }}</p>
         <br />
       </div>
