@@ -21,12 +21,15 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import include, path, reverse_lazy
-from django.views.generic.base import RedirectView
+from django.urls import include, path
+from django.contrib.auth import views as auth_views
+
+
 
 urlpatterns = [
+    path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
+    path("accounts/logout/", auth_views.LoginView.as_view(), name="logout"),
     path("admin/", admin.site.urls),
     path("books/", include("books_app.urls")),
     path("magazines/", include("books_app.magazines_urls")),
-
 ]
