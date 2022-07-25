@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from books_app.views import *
 # from books_app.views import (
 #     create_magazine,
@@ -16,6 +16,4 @@ urlpatterns = [
     path("<int:pk>/delete/", delete_magazine, name="delete_magazine"),
     path("<str:genre_name>/", show_genre_mags, name = "show_genre"),
 ]
-
-
 

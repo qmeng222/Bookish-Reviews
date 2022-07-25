@@ -15,28 +15,24 @@
       <div class="magazines-card">
         <p style="font-size: larger; color: blue">{{ magazine.title }}</p>
         <p>release cycle: {{ magazine.release_cycle }}</p>
+        <div>
+          genres: {% for g in magazine.genre.all %}
+          <span>{{ g.name }}, </span>
+          {% endfor %}
+        </div>
+
+        <br />
         {% if magazine.image %}
         <img
           src="{{ magazine.image }}"
           alt="magazine cover"
-          width="200"
+          width="220"
           height="300"
         />
         <p>{% endif %}</p>
         <p>{{ magazine.description }}</p>
 
-        {% for issue in magazine.magazine_issues.all %}
-        <ul>
-          <li>{{ issue.title }}</li>
-        </ul>
-        {% endfor %}
-
-        {% for magazine in magazines %}
-        <ul>
-          <li>{{ magazine.title }}</li>
-        </ul>
-
-        <a href={% url 'delete_magazine' magazine.pk %}>
+        <a href="{% url 'delete_magazine' magazine.pk %}">
           <button type="Button">delete</button>
         </a>
 
@@ -44,6 +40,11 @@
           <button type="Button">edit</button>
         </a>
 
+        <h3><br /><i>Past magazine issues:</i></h3>
+        {% for issue in magazine.magazine_issues.all %}
+        <ul>
+          <li>{{ issue.issue_num }}</li>
+        </ul>
         {% endfor %}
       </div>
     </main>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Reviews</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      {% for review in reviews_queryset %}
+      <div>
+        <h3>{{ review.book.title }}</h3>
+        <p>{{ review.text }}</p>
+      </div>
+    </main>
+  </body>
+</html>

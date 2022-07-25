@@ -20,15 +20,24 @@
         {% if book.image %}
         <img src="{{ book.image }}" alt="book cover" width="200" height="300" />
         {% endif %}
+        <h3><i>Description:</i></h3>
         <p>{{ book.description }}</p>
 
-        <a href={% url 'delete_book' book.pk %}>
+        <a href="{% url 'delete_book' book.pk %}">
           <button type="Button">delete</button>
         </a>
 
         <a href="{% url 'edit_book' book.pk %}">
           <button type="Button">edit</button>
         </a>
+
+        <h3><br /><i>Reviews:</i></h3>
+        <ol>
+          {% for review in book.reviews.all %}
+          <li>{{ review.text }}</li>
+          <br />
+          {% endfor %}
+        </ol>
       </div>
     </main>
   </body>

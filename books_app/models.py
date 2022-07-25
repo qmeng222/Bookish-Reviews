@@ -1,9 +1,7 @@
 from django.db import models
+from  django.contrib.auth.models import User
 
-# Create your models here.
-
-class Author(models.Model):
-    pass
+# Create your models below:
 
 class Book(models.Model):
    title = models.CharField(max_length=200, unique=True)
@@ -16,11 +14,19 @@ class Book(models.Model):
    description = models.TextField(null=True)
 
    def __str__(self):
-       return self.title + ' by ' + self. author
+       return self.title +' (' + self.author +')'
+
+class BookReview(models.Model):
+    text = models.TextField()
+    reviewer = models.ForeignKey(User, related_name='reviews_by_this_user', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, related_name='reviews', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.book) + ' reviewed by ' + str(self.reviewer)
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=200, unique=True)
-    # magazines = models.ManyToManyField("Magazine", related_name='genres')
 
     def __str__(self):
        return self.name
@@ -32,23 +38,26 @@ class Magazine(models.Model):
     description = models.TextField(null=True)
     image = models.URLField(null=True, blank=True)
     genre = models.ManyToManyField(Genre, related_name='magazines')
+    creator = models.ForeignKey(User, related_name='magazines', on_delete=models.CASCADE)
 
     def __str__(self):
        return self.title
 
-
 class Issue(models.Model):
     magazine = models.ForeignKey(Magazine, related_name='magazine_issues', on_delete=models.CASCADE)
-    title = models.CharField(max_length=200, unique=True)
+    issue_num = models.CharField(max_length=200, unique=True)
     issue_date = models.DateField()
     description = models.TextField(null=True)
     image = models.URLField(null=True, blank=True)
     pages = models.SmallIntegerField(null=True)
 
+    def __str__(self):
+        return self.title
 
-# class BookReview(models.Model):
-#     book = models.ForeignKey(Book, related_name='book_reviews', on_delete=models.CASCADE)
-#     text = models.TextField()
 
-# class  Author(models.Model):
-#     name = models.CharField(max_length=200, unique=True)
+class  Author(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    # publications = models.ManyToManyField(Book, related_name='authors')
+
+    def __str__(self):
+        return self.name

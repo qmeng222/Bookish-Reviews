@@ -7,8 +7,8 @@ from books_app.views import (
     show_book,
     show_books,
     edit_book,
+    list_reviews,
 )
-
 
 
 # URLConf:
@@ -18,5 +18,6 @@ urlpatterns = [
     path("<int:pk>/", show_book, name="show_book"),
     path("<int:pk>/edit/", edit_book, name="edit_book"),
     path("<int:pk>/delete/", delete_book, name="delete_book"),
+    path('reviews/', list_reviews, name='list_reveiws'),
 ]
 

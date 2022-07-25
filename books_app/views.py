@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 
 try:
    from books_app.forms import *
@@ -94,6 +95,7 @@ def show_magazines(request):
     }
     return render(request, "magazines/list.html", context)
 
+
 def edit_magazine(request, pk):
     context = {}
     form = MagazineForm(request.POST or None)
@@ -113,12 +115,29 @@ def delete_magazine(request, pk):
     return render(request, "magazines/delete.html", context)
 
 
-def show_mag_genres(request, mag_name):
-    genre = Genre.objects.get(name=mag_name)
-    context = {
-        "genre": genre
-    }
-    return render(request, "magazines/genre_detail.html", context)
+# def show_mag_genres(request, mag_name):
+#     genres = Genre.objects.get(name=mag_name)
+#     context = {
+#         "genres": genres
+#     }
+#     return render(request, "magazines/genre_detail.html", context)
+
+
+# def show_genre_mags(request, genre_name):
+#     g = Genre.objects.get(name=genre_name)
+#     magazines = Magazine.objects.filter(genre=g)
+#     context = {
+#         "magazines": magazines
+#     }
+#     return render(request, "magazines/detail.html", context)
+
+
+# def show_mag_genres(request, mag_name):
+#     genres = Genre.objects.get(name=mag_name)
+#     context = {
+#         "genres": genres
+#     }
+#     return render(request, "magazines/detail.html", context)
 
 
 def show_genre_mags(request, genre_name):
@@ -127,4 +146,13 @@ def show_genre_mags(request, genre_name):
     context = {
         "magazines": magazines
     }
-    return render(request, "magazines/detail.html", context)
+    return render(request, "magazines/genre_detail.html", context)
+
+
+@login_required
+def list_reviews(request):
+    book_reviews = request.user.reviews_by_this_user.all()
+    context = {
+        'reviews': book_reviews
+    }
+    return render(request, '/book/review_list.html', context)

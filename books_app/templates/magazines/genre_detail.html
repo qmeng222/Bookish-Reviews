@@ -9,11 +9,23 @@
   <body>
     <header></header>
     <main>
-      <ol>
-        {% for magazine in magazine.genre.all %}
-        <li>{{ magazine.title }}</li>
-        {% endfor %}
-      </ol>
+      {% for magazine in magazines %}
+      <h3>{{ magazine.title }}</h3>
+      <img
+        src="{{ magazine.image }}"
+        alt="magazine cover"
+        width="220"
+        height="300"
+      />
+      <p>{{ magazine.description }}</p>
+      <a href="{% url 'delete_magazine' magazine.pk %}">
+        <button type="Button">delete</button>
+      </a>
+      <a href="{% url 'edit_magazine' magazine.pk %}">
+        <button type="Button">edit</button>
+      </a>
+      <br /><br />
+      {% endfor %}
     </main>
   </body>
 </html>
